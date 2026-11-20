@@ -525,3 +525,81 @@ Revisando desviaciones del stack...
 11:51:16 
 RESULTADO: TODO OK, puedes entregar.
 11:51:16 FIN con código de salida 0
+
+===== setup 2026-11-20 12:30:04 =====
+12:30:04 Sistema detectado: windows x64  |  Python del arranque: 3.12.12
+12:30:04 MODO: entregar  |  versión del script: 2026-11-16  |  argumentos: --entregar
+12:30:05 SISTEMA: Windows-11-10.0.26200-SP0  |  detectado: windows x64  |  versión: 10.0.26200
+12:30:05 WINDOWS: build 26200  |  administrador: False
+12:30:05 PYTHON: 3.12.12 (C:\Users\Nancy\Downloads\plantilla-hackathon\hackathon-NFL-unam-2026\.venv\Scripts\python.exe)
+12:30:05 USUARIO: Nancy  |  carpeta actual: C:\Users\Nancy\Downloads\plantilla-hackathon\hackathon-NFL-unam-2026
+12:30:05 PROYECTO: C:\Users\Nancy\Downloads\plantilla-hackathon\hackathon-NFL-unam-2026  |  largo de ruta: 68  |  espacios: False  |  no ASCII: False
+12:30:05 DISCO LIBRE: 58.4 GB
+12:30:05 PROXY: ninguno
+12:30:05 Proyecto: C:\Users\Nancy\Downloads\plantilla-hackathon\hackathon-NFL-unam-2026
+12:30:05 
+Preparando la entrega...
+12:30:05 
+[1/7] Validando el entorno
+12:30:10 $ C:\Users\Nancy\Downloads\plantilla-hackathon\hackathon-NFL-unam-2026\.hackathon\.tools\uv\uv.exe pip check --python C:\Users\Nancy\Downloads\plantilla-hackathon\hackathon-NFL-unam-2026\.venv\Scripts\python.exe
+12:30:10 Checked 57 packages in 28ms
+All installed packages are compatible
+12:30:10 $ C:\Users\Nancy\Downloads\plantilla-hackathon\hackathon-NFL-unam-2026\.venv\Scripts\python.exe -c import pandas, numpy, fastapi, uvicorn, pydantic, strands, boto3, httpx
+12:30:15 
+12:30:15   Pieza              Esperado                            Encontrado      Estado
+12:30:15   -----------------  ----------------------------------  --------------  ------
+12:30:15   uv                 0.11.19                             0.11.19         OK    
+12:30:15   Python (.venv)     3.12.12                             3.12.12         OK    
+12:30:15   Node               v22.23.1                            v22.23.1        OK    
+12:30:15   npm                10.x                                10.9.8          OK    
+12:30:15   Paquetes Python    9 fijos                             9 coinciden     OK    
+12:30:15   Paquetes npm       12 fijos                            12 coinciden    OK    
+12:30:15   pip check          sin conflictos                      sin conflictos  OK    
+12:30:15   Importar paquetes  pandas, fastapi, pydantic, strands  importan        OK    
+12:30:15 
+[2/7] Revisando el README y el stack
+12:30:15     AVISO: README.md es muy corto (120 caracteres); los jueces lo leen primero
+12:30:15     AVISO: README.md no tiene ninguna imagen; los jueces piden un visual bien formateado
+12:30:16 $ C:\Users\Nancy\Downloads\plantilla-hackathon\hackathon-NFL-unam-2026\.venv\Scripts\python.exe -c import backend.main as m;assert hasattr(m,'app'), 'APP';assert any(getattr(r,'path','')=='/health' for r in m.app.routes), 'HEALTH'
+12:30:18 
+12:30:18     El proyecto sigue el stack del evento
+12:30:18     Rutas del dashboard OK (ninguna empieza con '/')
+12:30:18 
+[3/7] Compilando el dashboard (vite build)
+12:30:18 $ C:\Users\Nancy\Downloads\plantilla-hackathon\hackathon-NFL-unam-2026\.hackathon\.tools\node\node.exe C:\Users\Nancy\Downloads\plantilla-hackathon\hackathon-NFL-unam-2026\dashboard\node_modules\vite\bin\vite.js build
+12:30:29 [36mvite v5.4.21 [32mbuilding for production...[36m[39m
+transforming...
+[32mâœ“[39m 421 modules transformed.
+rendering chunks...
+computing gzip size...
+[2mdist/[22m[32mindex.html                 [39m[1m[2m  0.38 kB[22m[1m[22m[2m â”‚ gzip:   0.28 kB[22m
+[2mdist/[22m[35massets/index-C8VLwFke.css  [39m[1m[2m  9.00 kB[22m[1m[22m[2m â”‚ gzip:   2.41 kB[22m
+[2mdist/[22m[36massets/index-hVy1sMeN.js   [39m[1m[33m527.38 kB[39m[22m[2m â”‚ gzip: 159.99 kB[22m
+[33m
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+[32mâœ“ built in 9.48s[39m
+12:30:29     Dashboard compilado en dashboard/dist
+12:30:29 $ C:\Users\Nancy\Downloads\plantilla-hackathon\hackathon-NFL-unam-2026\.hackathon\.tools\node\node.exe C:\Users\Nancy\Downloads\plantilla-hackathon\hackathon-NFL-unam-2026\dashboard\node_modules\typescript\bin\tsc --noEmit -p C:\Users\Nancy\Downloads\plantilla-hackathon\hackathon-NFL-unam-2026\dashboard
+12:30:32 
+12:30:32 
+[4/7] Comprobando el backend (sintaxis e importación)
+12:30:32 $ C:\Users\Nancy\Downloads\plantilla-hackathon\hackathon-NFL-unam-2026\.venv\Scripts\python.exe -m compileall -q backend
+12:30:33 
+12:30:33 $ C:\Users\Nancy\Downloads\plantilla-hackathon\hackathon-NFL-unam-2026\.venv\Scripts\python.exe -c import backend.main
+12:30:35 
+12:30:35     Backend OK (backend.main se importa sin errores)
+12:30:35 
+[5/7] Buscando llaves y credenciales en tus archivos
+12:30:37     Sin credenciales a la vista
+12:30:37 
+[6/7] Empaquetando
+12:32:20 
+[7/7] Verificando el .zip
+12:32:27     152 archivos, 171.5 MB
+12:32:27 
+LISTO. Sube este archivo:
+  C:\Users\Nancy\Downloads\plantilla-hackathon\entrega-hackathon-NFL-unam-2026-20261120-1230.zip
+12:32:27 FIN con código de salida 0

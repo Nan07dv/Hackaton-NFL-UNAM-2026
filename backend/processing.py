@@ -1,6 +1,7 @@
 ﻿"""Procesamiento del juego con patron Strategy: cada estrategia produce una parte de la respuesta."""
 import re
 from abc import ABC, abstractmethod
+from functools import lru_cache
 from pathlib import Path
 
 import numpy as np
@@ -91,10 +92,23 @@ class TrackingStrategy(Strategy):
 STRATEGIES: list[Strategy] = [GameInfoStrategy(), RosterStrategy(), PlaysStrategy(), TrackingStrategy()]
 
 
+@lru_cache(maxsize=1)
+def base_tables() -> dict:
+    """CSV comunes a todos los juegos, se leen una sola vez."""
+    return {"games": pd.read_csv(DATA / "games.csv"),
+            "players": pd.read_csv(DATA / "players.csv"),
+            "plays": pd.read_csv(DATA / "plays.csv", na_values=["NA"])}
+
+
+def list_games() -> list[dict]:
+    g = base_tables()["games"].sort_values(["week", "gameDate", "gameTimeEastern", "gameId"])
+    cols = ["gameId", "week", "gameDate", "gameTimeEastern", "homeTeamAbbr", "visitorTeamAbbr"]
+    return [{k: clean(r[k]) for k in cols} for _, r in g.iterrows()]
+
+
+@lru_cache(maxsize=8)
 def build_game(game_id: int = GAME_ID) -> dict:
-    ctx = {"gameId": game_id,
-           "games": pd.read_csv(DATA / "games.csv"),
-           "players": pd.read_csv(DATA / "players.csv"),
-           "plays": pd.read_csv(DATA / "plays.csv", na_values=["NA"]),
+    """Procesa un juego bajo demanda; los ultimos 8 quedan en memoria."""
+    ctx = {"gameId": game_id, **base_tables(),
            "tracking": pd.read_csv(DATA / "tracking" / f"tracking_{game_id}.csv")}
     return {s.key: s.process(ctx) for s in STRATEGIES}

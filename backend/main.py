@@ -1,21 +1,14 @@
-﻿"""API de la plantilla. Ejecuta: .venv/Scripts/uvicorn backend.main:app --reload"""
-from functools import lru_cache
+"""API de la plantilla. Ejecuta: .venv/Scripts/uvicorn backend.main:app --reload"""
+from fastapi import FastAPI, HTTPException
 
-from fastapi import FastAPI
-
-from backend.processing import build_game
+from backend.processing import DATA, GAME_ID, base_tables, build_game, list_games
 
 app = FastAPI(title="Hackathon NFL UNAM")
 
 
-@lru_cache(maxsize=1)
-def game_data() -> dict:
-    return build_game()
-
-
 @app.on_event("startup")
 def warmup() -> None:
-    game_data()  # calcula al arrancar, sin escribir a disco
+    base_tables()  # lee los CSV comunes al arrancar, sin escribir a disco
 
 
 @app.get("/health")
@@ -23,6 +16,14 @@ def health() -> dict:
     return {"status": "ok"}
 
 
+@app.get("/api/games")
+def games() -> list[dict]:
+    return list_games()
+
+
 @app.get("/api/game")
-def game() -> dict:
-    return game_data()
+@app.get("/api/game/{game_id}")
+def game(game_id: int = GAME_ID) -> dict:
+    if not (DATA / "tracking" / f"tracking_{game_id}.csv").exists():
+        raise HTTPException(status_code=404, detail="Juego no encontrado")
+    return build_game(game_id)

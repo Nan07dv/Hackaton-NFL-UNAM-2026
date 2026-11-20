@@ -1,2 +1,6 @@
 # Hackaton-NFL-UNAM-2026
-Respositorio para el analisis de datos y aplicación del Hackaton AWS Kiro de la NFL en la UNAM.
+
+Aplicación de Visualización de jugadas durante un partido en tiempo real, con posibilidad de moverse hacia adelante y atrás en las jugadas. Se da información sobre los pases, la dirección y el resultada general de acuerdo a la jugadas. Se presenta información de todos los jugadores actuales con la posibilidad de saber de quien se trata al poner el mouse sobre ellos.
+
+Esta información puede usarse para visualización para comentaristas y publico general que busque informarse sobre el juego.
+
