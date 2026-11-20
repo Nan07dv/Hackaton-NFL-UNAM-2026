@@ -1,6 +1,6 @@
 # Entrega: hackathon-NFL-unam-2026
 
-- Generado: 2026-11-20 12:30 (windows x64)
+- Generado: 2026-11-20 12:33 (windows x64)
 - Stack verificado: Python 3.12.12, Node 22.23.1, uv 0.11.19
 - Dashboard compilado: sí (dashboard/dist)
 - Backend: se importa sin errores
@@ -8,7 +8,6 @@
 - Desviaciones del stack: ninguna
 
 ## Avisos
-- README.md es muy corto (120 caracteres); los jueces lo leen primero
 - README.md no tiene ninguna imagen; los jueces piden un visual bien formateado
 
 ## Cómo ejecutarlo

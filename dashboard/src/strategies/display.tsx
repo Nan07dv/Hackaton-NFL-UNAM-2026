@@ -31,12 +31,12 @@ const Header: FC<{ vm: ViewModel }> = ({ vm }) => (
   </section>
 )
 
-interface Pt { x: number; y: number; jersey?: number; color: string }
+interface Pt { x: number; y: number; jersey?: number; name?: string; pos?: string; color: string }
 // Tooltip: numero del jugador con el color de su equipo (el balon no muestra nada)
 const PlayerTip = ({ active, payload }: { active?: boolean; payload?: readonly { payload?: Pt }[] }) => {
   const pt = payload?.[0]?.payload
   if (!active || !pt || pt.jersey == null) return null
-  return <div className="rounded px-2 py-1 text-sm font-bold text-white shadow" style={{ background: pt.color }}>#{pt.jersey}</div>
+  return <div className="rounded px-2 py-1 text-sm font-bold text-white shadow" style={{ background: pt.color }}>#{pt.jersey} {pt.name}<div className="text-xs font-normal">{pt.pos}</div></div>
 }
 
 const Field: FC<{ vm: ViewModel }> = ({ vm }) => {
@@ -45,7 +45,8 @@ const Field: FC<{ vm: ViewModel }> = ({ vm }) => {
   track.ids.forEach((_, i) => {
     const t = track.teams[i]
     const side: Side = t === 'football' ? 'ball' : t === game.homeTeamAbbr ? 'home' : 'away'
-    pts[side].push({ x: frame[i][0], y: frame[i][1], jersey: vm.players[String(track.ids[i])]?.jersey, color: pointStrategies[side].color })
+    const pl = vm.players[String(track.ids[i])]
+    pts[side].push({ x: frame[i][0], y: frame[i][1], jersey: pl?.jersey, name: pl?.name, pos: pl?.pos, color: pointStrategies[side].color })
   })
   return (
     <section className={card}>
