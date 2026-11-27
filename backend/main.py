@@ -1,5 +1,11 @@
 """API de la plantilla. Ejecuta: .venv/Scripts/uvicorn backend.main:app --reload"""
 """ Despliegue en Render - Arreglo Error de Cors"""
+from fastapi import FastAPI, HTTPException
+
+from backend.processing import DATA, GAME_ID, base_tables, build_game, list_games
+
+app = FastAPI(title="Hackathon NFL UNAM")
+
 from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
@@ -7,14 +13,6 @@ app.add_middleware(
     allow_origins=["https://hackaton-nfl-unam-2026-front.onrender.com"],
     allow_methods=["GET"],
 )
-
-
-from fastapi import FastAPI, HTTPException
-
-from backend.processing import DATA, GAME_ID, base_tables, build_game, list_games
-
-app = FastAPI(title="Hackathon NFL UNAM")
-
 
 @app.on_event("startup")
 def warmup() -> None:
